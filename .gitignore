@@ -82,8 +82,8 @@ target/
 # /data/
 data/raw/
 data/processed/
-models/
-reports/
+# models/
+# reports/
 
 # Mac OS-specific storage files
 .DS_Store
