@@ -26,5 +26,7 @@ jobs:
           # directly run without pulling
           dvc repro
       - name: Run tests
+        env:
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: |
           python tests/test_model.py
