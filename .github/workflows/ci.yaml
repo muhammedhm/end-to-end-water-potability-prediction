@@ -29,4 +29,4 @@ jobs:
         env:
           DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: |
-          python tests/test_model.py
+          python ./tests/test_model.py
