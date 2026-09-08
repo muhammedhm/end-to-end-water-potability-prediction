@@ -2,6 +2,7 @@ import pandas as pd
 import yaml
 import pickle
 from sklearn.ensemble import RandomForestClassifier
+from pathlib import Path
 
 def load_params(params_path: str) -> int:
     try:
@@ -33,12 +34,16 @@ def train_model(X: pd.DataFrame, y: pd.Series, n_estimators: int) -> RandomFores
     except Exception as e:
         raise Exception(f"Error training model: {e}")
 
-def save_model(model: RandomForestClassifier, model_name: str) -> None:
+def save_model(model, filepath):
     try:
-        with open(model_name, "wb") as file:
+        filepath = Path(filepath)
+        filepath.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(filepath, "wb") as file:
             pickle.dump(model, file)
+
     except Exception as e:
-        raise Exception(f"Error saving model to {model_name}: {e}")
+        raise Exception(f"Error saving model to {filepath}: {e}")
 
 def main():
     try:
