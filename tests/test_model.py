@@ -1,4 +1,4 @@
-```python
+
 import os
 import mlflow
 import pandas as pd
@@ -121,4 +121,4 @@ if hasattr(prediction, "__len__") and len(prediction) > 0:
 
 
 print("\nModel test completed successfully.")
-```
+
