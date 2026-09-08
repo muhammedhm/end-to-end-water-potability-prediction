@@ -8,23 +8,39 @@ import mlflow
 # MLflow / DagsHub Configuration
 # ============================================================
 
-MLFLOW_TRACKING_URI = (
-    "https://dagshub.com/"
-    "muhammedhm/end-to-end-water-potability-prediction.mlflow"
-)
+# MLFLOW_TRACKING_URI = (
+#     "https://dagshub.com/"
+#     "muhammedhm/end-to-end-water-potability-prediction.mlflow"
+# )
 
 REGISTERED_MODEL_NAME = "water_potability_model"
 
 
-dagshub.init(
-    repo_owner="muhammedhm",
-    repo_name="end-to-end-water-potability-prediction",
-    mlflow=True,
-)
+# dagshub.init(
+#     repo_owner="muhammedhm",
+#     repo_name="end-to-end-water-potability-prediction",
+#     mlflow=True,
+# )
 
-mlflow.set_tracking_uri(
-    MLFLOW_TRACKING_URI
-)
+# mlflow.set_tracking_uri(
+#     MLFLOW_TRACKING_URI
+# )
+
+import os
+
+dagshub_token = os.getenv("DAGSHUB_TOKEN")
+if not dagshub_token:
+    raise EnvironmentError(
+        "DAGSHUB_TOKEN environment variable is not set. ")
+
+os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
+os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
+
+dagshub_url = "https://dagshub.com"
+repo_owner = "muhammedhm"
+repo_name = "end-to-end-water-potability-prediction"
+mlflow_tracking_uri = f"{dagshub_url}/{repo_owner}/{repo_name}.mlflow"
+mlflow.set_experiment("DVC PIPELINE 1")
 
 
 client = MlflowClient()
